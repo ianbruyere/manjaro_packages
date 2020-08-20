@@ -1,0 +1,7 @@
+# generates the list
+pacman -Qqe > pkglist.txt
+sudo pacman -S < pkglist.txt # this will install all packages on list
+# removes all 'foreign' packages e.g. AUR
+sudo pacman -S $(comm -12 <(pacman -Slq | sort) <(sort pkglist.txt)) 
+# removes all packages not on backup list
+# sudo pacman -Rsu $(comm -23 <(pacman -Qq | sort) <(sort pkglist.txt))  
